@@ -21,8 +21,11 @@ function add() {
     const initialResult = currentResult;
     currentResult += enteredNumber;
     createAndWriteOutput('+', initialResult, enteredNumber); 
+    const logEntry = {
+        oparation: 'AD'
+    };
     logEntries.push(enteredNumber);
-    console.log(logEntries[0]);
+    console.log(logEntries[1]);
 }
 
 function subtract() {
