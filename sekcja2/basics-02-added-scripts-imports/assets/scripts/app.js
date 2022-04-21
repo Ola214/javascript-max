@@ -22,10 +22,13 @@ function add() {
     currentResult += enteredNumber;
     createAndWriteOutput('+', initialResult, enteredNumber); 
     const logEntry = {
-        oparation: 'AD'
+        oparation: 'ADD',
+        prevResult: initialResult,
+        number: enteredNumber,
+        result: currentResult
     };
-    logEntries.push(enteredNumber);
-    console.log(logEntries[1]);
+    logEntries.push(logEntry);
+    console.log(logEntries);
 }
 
 function subtract() {
