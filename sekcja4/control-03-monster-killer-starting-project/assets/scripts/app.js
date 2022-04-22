@@ -15,6 +15,7 @@ const enteredValue = parseInt(prompt('Maximum life for you and the monster.', '1
 
 let chosenMaxLife = parseInt(enteredValue);
 let battleLog = [];
+let lastLoggedEntry;
 
 if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
     chosenMaxLife = 100;
@@ -30,7 +31,7 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
     let logEntry = {
         event: ev,
         value: val,
-        finalMonsterHealth: MonsterHealth ,
+        finalMonsterHealth: MonsterHealth,
         finalPlayerHealth: playerHealth
     }
     switch (ev) {
@@ -60,21 +61,21 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
     // } else if (ev = LOG_EVENT_PLAYER_HEAL) {
     //     logEntry.target = 'PLAYER';
     // } else if (ev = LOG_EVENT_GAME_OVER) {
-        
+
     // }
     battleLog.push(logEntry);
 }
 
 function reset() {
     currentMonsterHealth = chosenMaxLife;
-    currentPlayerHealth = chosenMaxLife;  
+    currentPlayerHealth = chosenMaxLife;
     resetGame(chosenMaxLife);
 }
 
 
 function endRound() {
     const initialPlayerHealth = currentPlayerHealth;
-    const playerDamage =  dealPlayerDamage(MONSTER_ATTACK_VALUE);
+    const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
     currentPlayerHealth -= playerDamage;
     writeToLog(LOG_EVENT_MONSTER_ATTACK, playerDamage, currentMonsterHealth, currentPlayerHealth);
 
@@ -94,7 +95,7 @@ function endRound() {
         alert('You lost!');
         writeToLog(LOG_EVENT_GAME_OVER, 'MONSTER WON', currentMonsterHealth, currentPlayerHealth);
 
-    } else if (currentPlayerHealth <=0 && currentMonsterHealth <= 0) {
+    } else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
         alert('You have a draw!');
         writeToLog(LOG_EVENT_GAME_OVER, 'A DRAW', currentMonsterHealth, currentPlayerHealth);
     }
@@ -149,9 +150,13 @@ function printLogHandler() {
 
     let i = 0;
     for (const logEntry of battleLog) {
-        console.log(`#${i}`);
-        for (const key in logEntry) {
-            console.log(`${key} => ${logEntry[key]}`);
+        if ((!lastLoggedEntry && lastLoggedEntry != 0) || lastLoggedEntry === i) {
+            console.log(`#${i}`);
+            for (const key in logEntry) {
+                console.log(`${key} => ${logEntry[key]}`);
+            }
+            lastLoggedEntry = i;
+            break;
         }
         i++;
     }
