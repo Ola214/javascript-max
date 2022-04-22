@@ -1,6 +1,6 @@
 const startGameBtn = document.getElementById('start-game-btn');
 
-function start() {
+const start = function () {
     console.log('Game is starting...');
 };
 
@@ -15,4 +15,6 @@ function start() {
 
 // console.log(typeof startGame());
 
-startGameBtn.addEventListener('click', start);
+startGameBtn.addEventListener('click', function () {
+    console.log('Game is starting...', age);
+});
