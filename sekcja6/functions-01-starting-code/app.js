@@ -13,4 +13,6 @@ function startGame() {
 
 // person.greet();
 
+// console.log(typeof startGame());
+
 startGameBtn.addEventListener('click', startGame);
